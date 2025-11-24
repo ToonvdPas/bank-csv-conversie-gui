@@ -159,6 +159,9 @@ class csv_conversie:
         frame_treeview.grid_rowconfigure(self.grid_rownr_tree, weight=1) # Laat het treeview-frame vertikaal resizen.
         frame_treeview.grid_columnconfigure(0, weight=1)                 # Laat het treeview-frame horizontaal resizen.
 
+        if args.cfgfile is not None:
+            self.load_config()
+
         # Some silly manipulations to make us cross-compatible with the Windows filesystem.
     def fix_path(self, path):
         if os.altsep is not None:
@@ -246,19 +249,30 @@ class csv_conversie:
                                     'logfile':   self.var_logfile.get(),
                                     'verbosity': self.var_verbosity.get(),
                                     'cfgfile':   self.var_cfgfile.get()}
-        with open(self.var_cfgfile.get(), 'w') as configfile:
-            config.write(configfile)
+        try:
+            with open(self.var_cfgfile.get(), 'w') as configfile:
+                config.write(configfile)
+        except (OSError, IOError) as e:
+            self.create_text_window("ERROR", "Failed to save config to INI-file:\n" + str(e))
+            sys.exit(2)
 
     def load_config(self):
-        config = configparser.ConfigParser()
-        config.read(self.var_cfgfile.get())
-        self.set_entry(self.entry_script,                  config['CSV-conversion']['script'])
-        self.set_entry(self.entry_infile,    self.fix_path(config['CSV-conversion']['infile']))
-        self.set_entry(self.entry_matchfile, self.fix_path(config['CSV-conversion']['matchfile']))
-        self.set_entry(self.entry_outdir,    self.fix_path(config['CSV-conversion']['outdir']))
-        self.set_entry(self.entry_logfile,   self.fix_path(config['CSV-conversion']['logfile']))
-        self.var_verbosity.set(              config['CSV-conversion']['verbosity'])
-        self.set_entry(self.entry_cfgfile,   self.fix_path(config['CSV-conversion']['cfgfile']))
+        if os.path.exists(self.var_cfgfile.get()):
+            try:
+                config = configparser.ConfigParser()
+                config.read(self.var_cfgfile.get())
+                self.set_entry(self.entry_script,                  config['CSV-conversion']['script'])
+                self.set_entry(self.entry_infile,    self.fix_path(config['CSV-conversion']['infile']))
+                self.set_entry(self.entry_matchfile, self.fix_path(config['CSV-conversion']['matchfile']))
+                self.set_entry(self.entry_outdir,    self.fix_path(config['CSV-conversion']['outdir']))
+                self.set_entry(self.entry_logfile,   self.fix_path(config['CSV-conversion']['logfile']))
+                self.var_verbosity.set(              config['CSV-conversion']['verbosity'])
+                self.set_entry(self.entry_cfgfile,   self.fix_path(config['CSV-conversion']['cfgfile']))
+            except (OSError, IOError, KeyError) as e:
+                self.create_text_window("ERROR", "Failed to load config from INI-file:\n" + str(e))
+                sys.exit(2)
+        else:
+            self.create_text_window("ERROR", "The specified INI-file does not exist!\n")
 
     def create_text_window(self, severity, text):
         text_win=tk.Toplevel(root)
