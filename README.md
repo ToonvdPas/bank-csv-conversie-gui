@@ -16,6 +16,8 @@ Wanneer de configuratie geladen is kan de conversie worden gestart via de knop `
 Na voltooiing scant dit programma de logfile en produceert een handig overzicht van mutaties die niet gematched zijn, en dus niet gerubriceerd konden worden.  Aan de hand van dit overzicht kun je makkelijk de ontbrekende rules toevoegen aan de ```matching-rules.csv```.
 
 # Commandline-argumenten
+```
 options:<br>
   -h, --help             show this help message and exit<br>
   --cfgfile CFGFILE      initial INI-file, handy when starting up from a BAT-file<br>
+```
