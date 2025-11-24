@@ -14,3 +14,8 @@ Om het programma te gebruiken dien je eenmalig de configuratie in te voeren en o
 Wanneer de configuratie geladen is kan de conversie worden gestart via de knop ```Run CSV Conversion```.  Het script ```Script name``` wordt nu uitgevoerd, waarbij per eigen bankrekening een apart uitvoerbestand in CSV-formaat wordt aangemaakt.  Een eventueel bestaande logfile wordt overschreven.
 
 Na voltooiing scant dit programma de logfile en produceert een handig overzicht van mutaties die niet gematched zijn, en dus niet gerubriceerd konden worden.  Aan de hand van dit overzicht kun je makkelijk de ontbrekende rules toevoegen aan de ```matching-rules.csv```.
+
+# Commandline-argumenten
+options:<br>
+  -h, --help             show this help message and exit<br>
+  --cfgfile CFGFILE      initial INI-file, handy when starting up from a BAT-file<br>

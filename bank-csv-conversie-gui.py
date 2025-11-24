@@ -29,6 +29,7 @@ import os.path
 import sys
 import array
 from os.path import expanduser
+import argparse
 import configparser
 import subprocess
 import tkinter as tk
@@ -55,7 +56,10 @@ class csv_conversie:
         self.var_outdir    = tk.StringVar(value = "")
         self.var_logfile   = tk.StringVar(value = "")
         self.var_verbosity = tk.StringVar(value = "2 (WARN)")
-        self.var_cfgfile   = tk.StringVar(value = "")
+        if args.cfgfile == None:
+            self.var_cfgfile   = tk.StringVar(value = "")
+        else:
+            self.var_cfgfile   = tk.StringVar(value=args.cfgfile)
 
         # Dit frame bevat de configuratie- en control-widgets.
         # Het biedt alléén horizontale resizing.
@@ -219,7 +223,7 @@ class csv_conversie:
 
     def select_cfgfile(self):
         tmp_var  = ""
-        init_dir = self.entry_cfgfile.get()
+        init_dir = os.path.dirname(self.entry_cfgfile.get())
         if init_dir == "":
             init_dir = self.home_dir
         filetypes = (
@@ -374,6 +378,11 @@ class csv_conversie:
 
 
 if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(description='This program provides a GUI for the rabo-csv.py and ing-csv.py programs.')
+    parser.add_argument('--cfgfile', default=None)
+    args = parser.parse_args()
+
     root = tk.Tk()
     app = csv_conversie(root)
     root.mainloop()
