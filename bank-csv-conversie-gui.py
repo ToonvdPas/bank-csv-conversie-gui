@@ -298,6 +298,7 @@ class csv_conversie:
         frame_text_box.grid_rowconfigure(0, weight=1)
         frame_text_box.grid_columnconfigure(0, weight=1)
         frame_buttons.grid_columnconfigure(0, weight=1)
+        text_win.attributes("-topmost", True)
 
         self.root.wait_window(text_win)
 
