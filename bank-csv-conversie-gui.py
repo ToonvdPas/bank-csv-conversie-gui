@@ -338,11 +338,11 @@ class csv_conversie:
                             'Regarding':     regarding
                         })
 
-                unmatched_record_dict_list_sorted=sorted(unmatched_record_dict_list,
-                                                         key=operator.itemgetter('Tegenpartij',
-                                                                                 'Tegenrekening'))
+                sorted_dict_list = sorted(unmatched_record_dict_list,
+                                          key=lambda k: "".join(k['Tegenpartij'] + k['Tegenrekening']).lower()
+                )
 
-                for row in unmatched_record_dict_list_sorted:
+                for row in sorted_dict_list:
                     self.tree.insert("", tk.END, values=(row['Bedrag'],
                                                          row['Tegenrekening'],
                                                          row['Tegenpartij'],
