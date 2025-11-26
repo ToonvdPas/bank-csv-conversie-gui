@@ -339,7 +339,7 @@ class csv_conversie:
                         })
 
                 sorted_dict_list = sorted(unmatched_record_dict_list,
-                                          key=lambda k: "".join(k['Tegenpartij'] + k['Tegenrekening']).lower()
+                                          key=lambda k: (k['Tegenpartij'].lower(), k['Tegenrekening'].lower())
                 )
 
                 for row in sorted_dict_list:
