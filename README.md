@@ -36,11 +36,11 @@ Hierbij zullen we direct ook een configuratiebestand meegeven, zodat je in de me
   - ```bank-csv-conversie-gui.py```
   - ```matchin-rules.csv```
 - Start het programma ```bank-csv-conversie-gui.py```, en vul alle velden in.
-  Sla de configuatie op onder de naam ```C:\%HOMEPATH%\ing-csv\ing-csv-conversie.ini```
+  Voor ons voorbeeld sla je de configuatie op onder de naam ```C:\%HOMEPATH%\ing-csv\ing-csv-conversie.ini```
 
 - Open nu een CMD prompt, en type in ```where pythonw```:
   <img src="Files/where-pythonw.png" alt="CMD where pythonw command" title="CMD where pythonw command" width="75%"/><br>
-  Mocht je per abuis een PowerShell-window geopend hebben, dan is het commando ```(Get-Command pythonw).Path```:
+  Mocht je per abuis een PowerShell-window geopend hebben, dan is het commando ```(Get-Command pythonw).Path```:<br>
   <img src="Files/powershell-get-command.png" alt="PS Get-Command pythonw" title="PS Get-Command pythonw" width="75%"/><br>
 - Creëer nu (via de rechter muisknop) een nieuwe ```snelkoppeling/shortcut``` in de zojuist aangemaakte directory.<br>
   Bij de vraag naar de locatie van het item vullen we het zojuist opgevraagde pad naar ```pythonw``` in.<br>
